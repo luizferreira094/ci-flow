@@ -96,6 +96,7 @@ workflows:
       - release:
           type: approval
           requires:
+            - pre_release
             - deploying_staging
           filters:
             branches:
