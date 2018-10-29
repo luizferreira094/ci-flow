@@ -6,8 +6,6 @@ jobs:
     steps:
       - run: echo "Generating artifacts"
 
-  building_image:
-    docker:
       - image: alpine:latest
     steps:
       - run: echo "Generating image"
@@ -59,18 +57,15 @@ workflows:
   flow:
     jobs:
       - building_artifacts
-      - building_image:
-          requires:
-            - building_artifacts
       - unit_tests:
           requires:
-            - building_image
+            - building_artifacts
       - integrated_tests:
           requires:
-            - building_image
+            - building_artifacts
       - release_tests:
           requires:
-            - building_image
+            - building_artifacts
       - pre_release:
           requires:
             - unit_tests
