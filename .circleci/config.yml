@@ -56,12 +56,24 @@ workflows:
       - pre_release:
           requires:
             - tests
+          filters:
+            branches:
+              only: master
       - deploying_staging:
           requires:
             - pre_release
+          filters:
+            branches:
+              only: master
       - release:
           requires:
             - deploying_staging
+          filters:
+            branches:
+              only: master
       - deploying_production:
           requires:
             - release
+          filters:
+            branches:
+              only: master
