@@ -1,0 +1,52 @@
+# Java Maven CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-java/ for more details
+#
+version: 2
+jobs:
+  building_artifacts:
+    docker:
+      - image: alpine:latest
+    steps:
+      - run: echo "Generating artifacts"
+
+  building_image:
+    docker:
+      - image: alpine:latest
+    steps:
+      - run: echo "Generating image"
+
+  tests:
+    docker:
+      - image: alpine:latest
+    steps:
+      - run: echo "Testing"
+
+  pre_release:
+    docker:
+      - image: alpine:latest
+    steps:
+      - run: echo "Generating pre-release"
+
+  deploying_staging:
+    docker:
+      - image: alpine:latest
+    steps:
+      - run: echo "deploying pre-release to Staging"
+
+  release:
+    docker:
+      - image: alpine:latest
+    steps:
+      - run: echo "Generating release"
+
+  deploying_production:
+    docker:
+      - image: alpine:latest
+    steps:
+      - run: echo "Deploying release to Production"
+
+
+
+
+
