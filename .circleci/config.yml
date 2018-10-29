@@ -50,7 +50,9 @@ workflows:
       - building_image:
           requires:
             - building_artifacts
-      - tests
+      - tests:
+          requires:
+            - building_image
       - pre_release:
           requires:
             - tests
