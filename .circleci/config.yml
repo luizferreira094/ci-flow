@@ -12,11 +12,23 @@ jobs:
     steps:
       - run: echo "Generating image"
 
-  tests:
+  unit_tests:
     docker:
       - image: alpine:latest
     steps:
       - run: echo "Testing"
+
+  integrated_tests:
+    docker:
+      - image: alpine:latest
+    steps:
+      - run: echo "More Testing"
+
+  release_tests:
+    docker:
+      - image: alpine:latest
+    steps:
+      - run: echo "More, More Testing"
 
   pre_release:
     docker:
@@ -50,12 +62,20 @@ workflows:
       - building_image:
           requires:
             - building_artifacts
-      - tests:
+      - unit_tests:
+          requires:
+            - building_image
+      - integrated_tests:
+          requires:
+            - building_image
+      - release_tests:
           requires:
             - building_image
       - pre_release:
           requires:
-            - tests
+            - unit_tests
+            - integrated_tests
+            - release_tests
           filters:
             branches:
               only: master
