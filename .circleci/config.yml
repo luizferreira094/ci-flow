@@ -66,8 +66,6 @@ workflows:
             branches:
               only: master
       - release:
-          requires:
-            - deploying_staging
           type: approval
           requires:
             - deploying_staging
