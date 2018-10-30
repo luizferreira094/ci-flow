@@ -4,13 +4,23 @@ jobs:
     docker:
       - image: alpine:latest
     steps:
-      - run: echo "Generating artifacts"
+      - run:
+          command: |
+            echo "Generating artifacts"
+            export VERSION="latest" |
+      - save_cache:
+          key: cache-v1-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - {{ .VERSION }}
 
   building_dependencies:
     docker:
       - image: alpine:latest
     steps:
-      - run: echo "Generating dependencies"
+      - run: echo $VERSION
+      - restore_cache:
+          keys:
+            - cache-v1-{{ .Environment.CIRCLE_SHA1 }}
 
   building_image:
     docker:
