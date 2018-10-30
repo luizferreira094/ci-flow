@@ -7,7 +7,7 @@ jobs:
       - run:
           command: |
             echo "Generating artifacts"
-            export VERSION="latest" |
+            export VERSION="latest"
 #      - save_cache:
 #          key: cache-v1-{{ .Environment.CIRCLE_SHA1 }}
 #          paths:
